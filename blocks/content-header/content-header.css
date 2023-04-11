@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 26px;
+    gap: 27px;
     padding-top: 42px;
   }
 }
@@ -39,7 +39,7 @@
   font-size: 42px;
   line-height: 1.14;
   color: #FFFFFF;
-  margin: 0 42px 14px 0;
+  margin: 0 42px 8px 0;
   position: relative;
 }
 
@@ -48,7 +48,6 @@
     margin-right: 0;
   }
 }
-
 
 @media screen and (max-width: 425px) {
   .content-header__title {
@@ -71,7 +70,7 @@
   position: absolute;
   z-index: 100;
   bottom: .2em;
-  right: -42px;
+  right: -44px;
 }
 
 @media screen and (max-width: 425px) {
@@ -80,7 +79,7 @@
     width: 18px;
     background-size: 8px;
     right: -28px;
-    bottom: .2em;
+    bottom: .26em;
   }
 }
 
@@ -120,17 +119,18 @@
   background-position: center;
   background-color: transparent;
   background-repeat: no-repeat;
-  border: 1px solid white;
-  box-sizing: border-box;
+  border: 2px solid white;
   margin-left: auto;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 768px) {
   .content-header__add-button {
+    background-size: 16px;
     width: 100%;
     margin-left: 0;
-    margin-top: 10px;
+    margin-top: 5px;
   }
 }
 
