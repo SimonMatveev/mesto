@@ -1,0 +1,27 @@
+.footer {
+  padding-top: 66px;
+  padding-bottom: 60px;
+}
+
+@media screen and (max-width: 425px) {
+  .footer {
+    padding-top: 48px;
+    padding-bottom: 36px;
+  }
+}
+
+.footer__text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+  color: #545454;
+  margin: 0;
+}
+
+@media screen and (max-width: 425px) {
+  .footer__text {
+    font-size: 14px;
+  }
+}
