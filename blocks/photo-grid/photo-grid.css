@@ -58,6 +58,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  cursor: pointer;
 }
 
 .photo-grid__like-button:hover {
