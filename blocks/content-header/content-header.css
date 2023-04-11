@@ -80,6 +80,7 @@
     background-size: 8px;
     right: -28px;
     bottom: .26em;
+    transition: opacity .3s;
   }
 }
 
@@ -123,6 +124,7 @@
   margin-left: auto;
   cursor: pointer;
   box-sizing: border-box;
+  transition: opacity .3s;
 }
 
 @media screen and (max-width: 768px) {

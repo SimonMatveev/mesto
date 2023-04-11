@@ -3,4 +3,9 @@
   background-color: black;
   margin: 0;
   min-width: 320px;
+  position: relative;
+}
+
+.page_locked {
+  overflow-y: hidden;
 }

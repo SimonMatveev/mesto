@@ -1,0 +1,135 @@
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: none;
+  background-color: rgba(0, 0, 0, .5);
+  padding: 0 19px;
+  box-sizing: border-box;
+  z-index: 200;
+}
+
+.popup_opened {
+  display: flex;
+}
+
+.popup__container {
+  max-width: 430px;
+  margin: auto;
+  padding: 34px 36px 37px;
+  background-color: white;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+}
+
+@media screen and (max-width: 425px) {
+  .popup__container {
+    padding: 25px 22px;
+  }
+}
+
+.popup__title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.21;
+  color: #000000;
+  margin: 0 0 48px;
+}
+
+@media screen and (max-width: 425px) {
+  .popup__title {
+    font-size: 18px;
+    line-height: 1.21;
+    margin-bottom: 75px;
+  }
+}
+
+.popup__input {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  color: black;
+  padding-bottom: 7px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.popup__input:not(:last-of-type) {
+  margin-bottom: 30px;
+}
+
+.popup__input::placeholder {
+  font-size: 14px;
+  line-height: 1.21;
+  color: rgba(0, 0, 0, .5);
+}
+
+.popup__btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+  color: #FFFFFF;
+  border: none;
+  background-color: black;
+  border-radius: 2px;
+  min-height: 50px;
+  vertical-align: middle;
+  transition: background-color .3s;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 425px) {
+  .popup__btn {
+    font-size: 14px;
+    margin-top: 15px;
+    min-height: 46px;
+  }
+}
+
+.popup__btn:hover {
+  background-color: rgba(0, 0, 0, .8);
+}
+
+.popup__close {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-image: url(../../images/close-icon.svg);
+  background-position: center;
+  background-size: contain;
+  top: -40px;
+  right: -40px;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  transition: opacity .3s;
+}
+
+.popup__close:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 768px) {
+  .popup__close {
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: -36px;
+  }
+}
