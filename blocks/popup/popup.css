@@ -1,5 +1,5 @@
 .popup {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
@@ -75,6 +75,10 @@
   color: rgba(0, 0, 0, .5);
 }
 
+.popup__input:focus {
+  outline: none;
+  border-bottom: 1px solid black;
+}
 .popup__btn {
   width: 100%;
   margin-top: 18px;

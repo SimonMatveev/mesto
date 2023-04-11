@@ -24,11 +24,14 @@
 .content-header__title-container {
   align-items: center;
   align-content: center;
+  position: relative;
+  margin-right: 42px;
 }
 
 @media screen and (max-width: 768px) {
   .content-header__title-container {
     gap: 14px;
+    margin-right: 0;
   }
 }
 
@@ -39,14 +42,7 @@
   font-size: 42px;
   line-height: 1.14;
   color: #FFFFFF;
-  margin: 0 42px 8px 0;
-  position: relative;
-}
-
-@media screen and (max-width: 768px) {
-  .content-header__title {
-    margin-right: 0;
-  }
+  margin: 0 0 8px;
 }
 
 @media screen and (max-width: 425px) {
@@ -69,7 +65,7 @@
   cursor: pointer;
   position: absolute;
   z-index: 100;
-  bottom: .2em;
+  top: 15px;
   right: -44px;
 }
 
@@ -79,7 +75,7 @@
     width: 18px;
     background-size: 8px;
     right: -28px;
-    bottom: .26em;
+    top: 7px;
     transition: opacity .3s;
   }
 }
