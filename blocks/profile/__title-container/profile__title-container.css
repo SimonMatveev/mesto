@@ -1,21 +1,22 @@
-.content-header__title-container {
+.profile__title-container {
   align-items: center;
   align-content: center;
   position: relative;
-  margin-right: 42px;
-  max-width: 460px;
+  display: grid;
+  grid-template-columns: minmax(200px, max-content) 24px;
+  column-gap: 20px;
 }
 
 @media screen and (max-width: 768px) {
-  .content-header__title-container {
+  .profile__title-container {
+    display: block;
     gap: 14px;
-    margin-right: 0;
     max-width: calc(100% - 88px);
   }
 }
 
 @media screen and (max-width: 425px) {
-  .content-header__title-container {
+  .profile__title-container {
     max-width: calc(100% - 56px);
   }
 }

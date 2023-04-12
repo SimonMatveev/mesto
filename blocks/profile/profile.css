@@ -1,4 +1,4 @@
-.content-header {
+.profile {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -7,22 +7,9 @@
 }
 
 @media screen and (max-width: 768px) {
-  .content-header {
-    display: flex;
-    align-items: center;
+  .profile {
     flex-direction: column;
     gap: 27px;
     padding-top: 42px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-

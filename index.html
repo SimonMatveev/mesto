@@ -13,79 +13,81 @@
     <img src="./images/logo.svg" alt="Место. Логотип" class="header__logo">
   </header>
   <main class="content">
-    <section class="content-header container">
-      <img src="./images/avatar.jpg" alt="Аватар пользователя" class="content-header__avatar">
-      <div class="content-header__title-container">
-        <h1 class="content-header__title">Жак-Ив Кусто</h1>
-        <button class="content-header__edit-button"></button>
-        <p class="content-header__text">Исследователь океана</p>
+    <section class="profile container">
+      <img src="./images/avatar.jpg" alt="Аватар пользователя" class="profile__avatar">
+      <div class="profile__title-container">
+        <h1 class="profile__title">Жак-Ив Кусто</h1>
+        <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
+        <p class="profile__text">Исследователь океана</p>
       </div>
-      <button class="content-header__add-button"></button>
+      <button class="profile__add-button" type="button" aria-label="Добавить фотографию"></button>
     </section>
     <section class="photo-grid container" aria-label="Фото галлерея">
-      <figure class="photo-grid__item">
+      <div class="photo-grid__item">
         <img src="./images/bypaul-q0u8kb-3Taw-unsplash.jpg" alt="Озеро с красивым водопадом в центре, позади гора"
           class="photo-grid__image">
-        <figcaption class="photo-grid__caption">
+        <div class="photo-grid__caption">
           <h2 class="photo-grid__item-title">Киркьюфосс</h2>
-          <button class="photo-grid__like-button"></button>
-        </figcaption>
-      </figure>
-      <figure class="photo-grid__item">
+          <button class="photo-grid__like-button" type="button" aria-label="Мне нравится"></button>
+        </div>
+      </div>
+      <div class="photo-grid__item">
         <img src="./images/lena-oIvprEzFc0g-unsplash.jpg" alt="Гора покрытая снегом под голубым небом"
           class="photo-grid__image">
-        <figcaption class="photo-grid__caption">
+        <div class="photo-grid__caption">
           <h2 class="photo-grid__item-title">Клостерталь</h2>
-          <button class="photo-grid__like-button"></button>
-        </figcaption>
-      </figure>
-      <figure class="photo-grid__item">
+          <button class="photo-grid__like-button" type="button" aria-label="Мне нравится"></button>
+        </div>
+      </div>
+      <div class="photo-grid__item">
         <img src="./images/marek-piwnicki-tSWQYKlahfw-unsplash.jpg" alt="Ночное звездное небо над горным хребтом"
           class="photo-grid__image">
-        <figcaption class="photo-grid__caption">
+        <div class="photo-grid__caption">
           <h2 class="photo-grid__item-title">Южный Тироль</h2>
-          <button class="photo-grid__like-button"></button>
-        </figcaption>
-      </figure>
-      <figure class="photo-grid__item">
+          <button class="photo-grid__like-button" type="button" aria-label="Мне нравится"></button>
+        </div>
+      </div>
+      <div class="photo-grid__item">
         <img src="./images/richard-stachmann-2cXw2CmnTxQ-unsplash.jpg"
           alt="Группа людей прогуливается под пальмовыми деревьями" class="photo-grid__image">
-        <figcaption class="photo-grid__caption">
+        <div class="photo-grid__caption">
           <h2 class="photo-grid__item-title">Афины</h2>
-          <button class="photo-grid__like-button"></button>
-        </figcaption>
-      </figure>
-      <figure class="photo-grid__item">
+          <button class="photo-grid__like-button" type="button" aria-label="Мне нравится"></button>
+        </div>
+      </div>
+      <div class="photo-grid__item">
         <img src="./images/richard-stachmann-4sif7GvIm5E-unsplash.jpg" alt="Вид на океан и каменистые скалы"
           class="photo-grid__image">
-        <figcaption class="photo-grid__caption">
+        <div class="photo-grid__caption">
           <h2 class="photo-grid__item-title">Вульягмени</h2>
-          <button class="photo-grid__like-button"></button>
-        </figcaption>
-      </figure>
-      <figure class="photo-grid__item">
+          <button class="photo-grid__like-button" type="button" aria-label="Мне нравится"></button>
+        </div>
+      </div>
+      <div class="photo-grid__item">
         <img src="./images/thugbong-Nhx2IVkw22s-unsplash.jpg"
           alt="Река с каменистыми берегами, бегущая по зеленому лесу" class="photo-grid__image">
-        <figcaption class="photo-grid__caption">
+        <div class="photo-grid__caption">
           <h2 class="photo-grid__item-title">Касоль</h2>
-          <button class="photo-grid__like-button"></button>
-        </figcaption>
-      </figure>
+          <button class="photo-grid__like-button" type="button" aria-label="Мне нравится"></button>
+        </div>
+      </div>
     </section>
-    <section class="popup">
-      <form action="#" class="popup__container">
+    <div class="popup">
+      <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" name="name" id="name" class="popup__input" placeholder="Имя">
-        <input type="text" name="description" id="description" class="popup__input" placeholder="О себе">
-        <input class="popup__btn" type="submit" value="Сохранить">
-        <button class="popup__close"></button>
-      </form>
-    </section>
+        <button class="popup__close" type="button" aria-label="Закрыть окно редактирования"></button>
+        <form action="#" name="popup-form" class="popup__form">
+          <input type="text" name="name" id="name" class="popup__input" placeholder="Имя">
+          <input type="text" name="description" id="description" class="popup__input" placeholder="О себе">
+          <input class="popup__btn" type="submit" value="Сохранить">
+        </form>
+      </div>
+    </div>
   </main>
   <footer class="footer container">
     <p class="footer__text">&copy; 2023 Mesto Russia</p>
   </footer>
-  <script src="./pages/index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>
