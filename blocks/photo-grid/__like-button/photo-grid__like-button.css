@@ -9,6 +9,7 @@
   background-size: contain;
   cursor: pointer;
   transition: opacity .3s;
+  flex-shrink: 0;
 }
 
 .photo-grid__like-button:hover {

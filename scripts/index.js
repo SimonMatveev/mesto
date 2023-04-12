@@ -1,10 +1,9 @@
 let editButton = document.querySelector('.profile__edit-button');
-let form = document.querySelector('.popup__container');
+let form = document.querySelector('.popup__form');
 let popup = document.querySelector('.popup');
 let popupNameInput = document.getElementById('name');
 let popupDesc = document.getElementById('description');
 let popupClose = document.querySelector('.popup__close');
-let page = document.querySelector('.page');
 let profileName = document.querySelector('.profile__title');
 let profileDescription = document.querySelector('.profile__text');
 
