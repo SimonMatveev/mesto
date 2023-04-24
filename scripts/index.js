@@ -15,11 +15,11 @@ const popupImgCaption = popupImgElement.querySelector('.popup__caption');
 const popupImgClose = popupImgElement.querySelector('.popup__close');
 
 const addButton = document.querySelector('.profile__add-button')
-const popupCardElement = document.querySelector('#add-popup');
-const popupCardForm = popupCardElement.querySelector('.popup__form');
-const popupCardTitle = popupCardElement.querySelector('#card-title');
-const popupCardLink = popupCardElement.querySelector('#card-link');
-const popupCardClose = popupCardElement.querySelector('.popup__close');
+const popupAddCardElement = document.querySelector('#add-popup');
+const popupAddCardForm = popupAddCardElement.querySelector('.popup__form');
+const popupAddCardTitle = popupAddCardElement.querySelector('#card-title');
+const popupAddCardLink = popupAddCardElement.querySelector('#card-link');
+const popupAddCardClose = popupAddCardElement.querySelector('.popup__close');
 
 function handleOpenButton(element) {
   element.classList.add('popup_opened');
@@ -43,15 +43,15 @@ function handleEditFormSubmit(evt) {
 }
 
 function handleAddButton() {
-  handleOpenButton(popupCardElement);
+  handleOpenButton(popupAddCardElement);
 }
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
-  gridContainer.prepend(createCard(popupCardTitle.value, popupCardLink.value));
-  handleCloseButton(popupCardElement);
-  popupCardTitle.value = '';
-  popupCardLink.value = '';
+  gridContainer.prepend(createCard(popupAddCardTitle.value, popupAddCardLink.value));
+  handleCloseButton(popupAddCardElement);
+  popupAddCardTitle.value = '';
+  popupAddCardLink.value = '';
 }
 
 function handlePopupImage(link, title, altText) {
@@ -102,10 +102,10 @@ popupProfileClose.addEventListener('click', () => {
 
 addButton.addEventListener('click', handleAddButton);
 
-popupCardForm.addEventListener('submit', handleAddFormSubmit);
+popupAddCardForm.addEventListener('submit', handleAddFormSubmit);
 
-popupCardClose.addEventListener('click', () => {
-  handleCloseButton(popupCardElement);
+popupAddCardClose.addEventListener('click', () => {
+  handleCloseButton(popupAddCardElement);
 });
 
 popupImgClose.addEventListener('click', () => {
