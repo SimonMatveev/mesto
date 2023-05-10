@@ -7,55 +7,57 @@ const popupProfileElement = document.querySelector('#edit-popup');
 const popupProfileForm = popupProfileElement.querySelector('.popup__form');
 const popupProfileNameInput = popupProfileElement.querySelector('#name');
 const popupProfileDesc = popupProfileElement.querySelector('#description');
-const popupProfileClose = popupProfileElement.querySelector('.popup__close');
+const popupProfileButton = popupProfileElement.querySelector('.popup__btn')
 
 const popupImgElement = document.querySelector('#image-popup')
 const popupImgFrame = popupImgElement.querySelector('.popup__image');
 const popupImgCaption = popupImgElement.querySelector('.popup__caption');
-const popupImgClose = popupImgElement.querySelector('.popup__close');
 
-const addButton = document.querySelector('.profile__add-button')
+const addCardButton = document.querySelector('.profile__add-button')
 const popupAddCardElement = document.querySelector('#add-popup');
 const popupAddCardForm = popupAddCardElement.querySelector('.popup__form');
 const popupAddCardTitle = popupAddCardElement.querySelector('#card-title');
 const popupAddCardLink = popupAddCardElement.querySelector('#card-link');
-const popupAddCardClose = popupAddCardElement.querySelector('.popup__close');
 
-function handleOpenButton(element) {
+function handleOpening(element) {
   element.classList.add('popup_opened');
 }
 
-function handleCloseButton(element) {
+function handleClosing(element) {
   element.classList.remove('popup_opened');
 }
 
 function handleEditButton() {
-  handleOpenButton(popupProfileElement);
+  handleOpening(popupProfileElement);
   popupProfileNameInput.value = profileName.textContent;
   popupProfileDesc.value = profileDescription.textContent;
+  if(popupProfileButton.classList.contains('popup__btn_disabled')) {
+    popupProfileButton.classList.remove('popup__btn_disabled');
+    popupProfileButton.removeAttribute('disabled');
+  }
+}
+
+function handleAddCardButton() {
+  handleOpening(popupAddCardElement);
 }
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = popupProfileNameInput.value;
   profileDescription.textContent = popupProfileDesc.value;
-  handleCloseButton(popupProfileElement);
-}
-
-function handleAddButton() {
-  handleOpenButton(popupAddCardElement);
+  handleClosing(popupProfileElement);
 }
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
   gridContainer.prepend(createCard(popupAddCardTitle.value, popupAddCardLink.value));
-  handleCloseButton(popupAddCardElement);
+  handleClosing(popupAddCardElement);
   popupAddCardTitle.value = '';
   popupAddCardLink.value = '';
 }
 
 function handlePopupImage(link, title, altText) {
-  handleOpenButton(popupImgElement);
+  handleOpening(popupImgElement);
   popupImgFrame.src = link;
   popupImgFrame.alt = altText;
   popupImgCaption.textContent = title;
@@ -88,28 +90,39 @@ function createCard(title, link) {
   return cardElement;
 }
 
+function addClosePopupListeners(popupElement) {
+  popupElement.addEventListener('click', evt => {
+    if (evt.target === popupElement) {
+      handleClosing(popupElement);
+    }
+  });
+
+  document.addEventListener('keydown', evt => {
+    if (evt.key === 'Escape') {
+      handleClosing(popupElement);
+    }
+  });
+
+  const popupCloseButton = popupElement.querySelector('.popup__close');
+  popupCloseButton.addEventListener('click', () => {
+    handleClosing(popupElement);
+  });
+};
+
+const popupElementList = Array.from(document.querySelectorAll('.popup')); 
+
+popupElementList.forEach(popupElement => {
+  addClosePopupListeners(popupElement);
+});
+
 initialCards.forEach(item => {
   gridContainer.prepend(createCard(item.name, item.link));
 });
 
 editButton.addEventListener('click', handleEditButton);
 
+addCardButton.addEventListener('click', handleAddCardButton);
+
 popupProfileForm.addEventListener('submit', handleEditFormSubmit);
 
-popupProfileClose.addEventListener('click', () => {
-  handleCloseButton(popupProfileElement);
-});
-
-addButton.addEventListener('click', handleAddButton);
-
 popupAddCardForm.addEventListener('submit', handleAddFormSubmit);
-
-popupAddCardClose.addEventListener('click', () => {
-  handleCloseButton(popupAddCardElement);
-});
-
-popupImgClose.addEventListener('click', () => {
-  handleCloseButton(popupImgElement);
-});
-
-
