@@ -18,13 +18,23 @@ const popupAddCardElement = document.querySelector('#add-popup');
 const popupAddCardForm = popupAddCardElement.querySelector('.popup__form');
 const popupAddCardTitle = popupAddCardElement.querySelector('#card-title');
 const popupAddCardLink = popupAddCardElement.querySelector('#card-link');
+const popupAddCardButton = popupAddCardElement.querySelector('.popup__btn')
+
+function handleClosingOnEsc (evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    handleClosing(openedPopup);
+  }
+};
 
 function handleOpening(element) {
   element.classList.add('popup_opened');
+  document.addEventListener('keydown', handleClosingOnEsc);
 }
 
 function handleClosing(element) {
   element.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleClosingOnEsc);
 }
 
 function handleEditButton() {
@@ -39,6 +49,8 @@ function handleEditButton() {
 
 function handleAddCardButton() {
   handleOpening(popupAddCardElement);
+  popupAddCardButton.classList.add('popup__btn_disabled');
+  popupAddCardButton.setAttribute('disabled', true);
 }
 
 function handleEditFormSubmit(evt) {
@@ -52,8 +64,7 @@ function handleAddFormSubmit(evt) {
   evt.preventDefault();
   gridContainer.prepend(createCard(popupAddCardTitle.value, popupAddCardLink.value));
   handleClosing(popupAddCardElement);
-  popupAddCardTitle.value = '';
-  popupAddCardLink.value = '';
+  evt.target.reset()
 }
 
 function handlePopupImage(link, title, altText) {
@@ -93,12 +104,6 @@ function createCard(title, link) {
 function addClosePopupListeners(popupElement) {
   popupElement.addEventListener('click', evt => {
     if (evt.target === popupElement) {
-      handleClosing(popupElement);
-    }
-  });
-
-  document.addEventListener('keydown', evt => {
-    if (evt.key === 'Escape') {
       handleClosing(popupElement);
     }
   });
