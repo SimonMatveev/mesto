@@ -31,7 +31,7 @@ function handleEditButton() {
   handleOpening(popupProfileElement);
   popupProfileNameInput.value = profileName.textContent;
   popupProfileDesc.value = profileDescription.textContent;
-  if(popupProfileButton.classList.contains('popup__btn_disabled')) {
+  if (popupProfileButton.classList.contains('popup__btn_disabled')) {
     popupProfileButton.classList.remove('popup__btn_disabled');
     popupProfileButton.removeAttribute('disabled');
   }
@@ -109,7 +109,7 @@ function addClosePopupListeners(popupElement) {
   });
 };
 
-const popupElementList = Array.from(document.querySelectorAll('.popup')); 
+const popupElementList = Array.from(document.querySelectorAll('.popup'));
 
 popupElementList.forEach(popupElement => {
   addClosePopupListeners(popupElement);
