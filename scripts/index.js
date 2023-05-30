@@ -42,10 +42,6 @@ function handleEditButton() {
   handleOpening(popupProfileElement);
   popupProfileNameInput.value = profileName.textContent;
   popupProfileDesc.value = profileDescription.textContent;
-  if (popupProfileButton.classList.contains('popup__btn_disabled')) {
-    popupProfileButton.classList.remove('popup__btn_disabled');
-    popupProfileButton.removeAttribute('disabled');
-  }
 }
 
 function handleAddCardButton() {
