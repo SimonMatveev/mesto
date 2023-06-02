@@ -11,7 +11,6 @@ const popupProfileElement = document.querySelector('#edit-popup');
 const popupProfileForm = popupProfileElement.querySelector('.popup__form');
 const popupProfileNameInput = popupProfileElement.querySelector('#name');
 const popupProfileDesc = popupProfileElement.querySelector('#description');
-const popupProfileButton = popupProfileElement.querySelector('.popup__btn')
 
 const addCardButton = document.querySelector('.profile__add-button')
 const popupAddCardElement = document.querySelector('#add-popup');
@@ -20,61 +19,65 @@ const popupAddCardTitle = popupAddCardElement.querySelector('#card-title');
 const popupAddCardLink = popupAddCardElement.querySelector('#card-link');
 const popupAddCardButton = popupAddCardElement.querySelector('.popup__btn')
 
-function handleClosingOnEsc(evt) {
+function closeElementOnEsc(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
-    handleClosing(openedPopup);
+    closeElement(openedPopup);
   }
 };
 
-function handleOpening(element) {
+function openElement(element) {
   element.classList.add('popup_opened');
-  document.addEventListener('keydown', handleClosingOnEsc);
+  document.addEventListener('keydown', closeElementOnEsc);
 }
 
-function handleClosing(element) {
+function closeElement(element) {
   element.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleClosingOnEsc);
-  if (element.querySelector('.popup__form')) element.querySelector('.popup__form').reset();
+  document.removeEventListener('keydown', closeElementOnEsc);
 }
 
 function handleEditButton() {
-  handleOpening(popupProfileElement);
+  openElement(popupProfileElement);
   popupProfileNameInput.value = profileName.textContent;
   popupProfileDesc.value = profileDescription.textContent;
 }
 
 function handleAddCardButton() {
-  handleOpening(popupAddCardElement);
+  openElement(popupAddCardElement);
   popupAddCardButton.classList.add('popup__btn_disabled');
   popupAddCardButton.setAttribute('disabled', true);
+  popupAddCardForm.reset();
 }
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = popupProfileNameInput.value;
   profileDescription.textContent = popupProfileDesc.value;
-  handleClosing(popupProfileElement);
+  closeElement(popupProfileElement);
+}
+
+function prependGridCardElement(name, link) {
+  const cardElement = new Card(name, link, '#photo-grid-item', openElement);
+  gridContainer.prepend(cardElement.generateCard());
 }
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
-  const cardElement = new Card(popupAddCardTitle.value, popupAddCardLink.value, '#photo-grid-item', handleOpening);
-  gridContainer.prepend(cardElement.generateCard());
-  handleClosing(popupAddCardElement);
+  prependGridCardElement(popupAddCardTitle.value, popupAddCardLink.value);
+  closeElement(popupAddCardElement);
   evt.target.reset()
 }
 
 function addClosePopupListeners(popupElement) {
   popupElement.addEventListener('click', evt => {
     if (evt.target === popupElement) {
-      handleClosing(popupElement);
+      closeElement(popupElement);
     }
   });
 
   const popupCloseButton = popupElement.querySelector('.popup__close');
   popupCloseButton.addEventListener('click', () => {
-    handleClosing(popupElement);
+    closeElement(popupElement);
   });
 };
 
@@ -85,8 +88,7 @@ popupElementList.forEach(popupElement => {
 });
 
 initialCards.forEach(item => {
-  const cardElement = new Card(item.name, item.link, '#photo-grid-item', handleOpening);
-  gridContainer.prepend(cardElement.generateCard());
+  prependGridCardElement(item.name, item.link);
 });
 
 editButton.addEventListener('click', handleEditButton);
@@ -100,7 +102,7 @@ popupAddCardForm.addEventListener('submit', handleAddFormSubmit);
 const formList = Array.from(document.forms);
 
 formList.forEach(formElement => {
-  const FormValidatorItem = new FormValidator({
+  const formValidatorItem = new FormValidator({
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__btn',
@@ -108,5 +110,5 @@ formList.forEach(formElement => {
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
   }, formElement);
-  FormValidatorItem.enableValidation();
+  formValidatorItem.enableValidation();
 });

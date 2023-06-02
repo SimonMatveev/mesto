@@ -34,14 +34,22 @@ export class FormValidator {
         return this._inputList.some(input => !input.validity.valid);
     }
 
+    disableButton() {
+        this._submitButtonElement.classList.add(this._formObject.inactiveButtonClass);
+        this._submitButtonElement.setAttribute('disabled', true);
+    }
+
+    enableButton() {
+        this._submitButtonElement.classList.remove(this._formObject.inactiveButtonClass);
+            this._submitButtonElement.removeAttribute('disabled');
+    }
+
     _toggleButton() {
         this._submitButtonElement = this._form.querySelector(this._formObject.submitButtonSelector);
         if (this._hasInvalidInput()) {
-            this._submitButtonElement.classList.add(this._formObject.inactiveButtonClass);
-            this._submitButtonElement.setAttribute('disabled', true);
+            this.disableButton();
         } else {
-            this._submitButtonElement.classList.remove(this._formObject.inactiveButtonClass);
-            this._submitButtonElement.removeAttribute('disabled');
+            this.enableButton();
         };
     };
 

@@ -1,9 +1,10 @@
 export class Card {
-  constructor(title, link, template, handleOpening) {
+  constructor(title, link, template, openElement) {
     this._title = title;
     this._link = link;
     this._template = template;
-    this._handleOpening = handleOpening;
+    this._openElement = openElement;
+    this._popupElement = document.querySelector('#image-popup');
   }
 
   _getTemplate() {
@@ -11,11 +12,10 @@ export class Card {
   }
 
   _handlePopupImage() {
-    this.popupElement = document.querySelector('#image-popup');
-    this._handleOpening(this.popupElement);
-    this.popupElement.querySelector('.popup__image').src = this._link;
-    this.popupElement.querySelector('.popup__image').alt = this._cardImage.alt;
-    this.popupElement.querySelector('.popup__caption').textContent = this._title;
+    this._openElement(this._popupElement);
+    this._popupElement.querySelector('.popup__image').src = this._link;
+    this._popupElement.querySelector('.popup__image').alt = this._cardImage.alt;
+    this._popupElement.querySelector('.popup__caption').textContent = this._title;
   }
 
   _setEventListeners() {
