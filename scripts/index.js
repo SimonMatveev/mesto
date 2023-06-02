@@ -74,14 +74,14 @@ function handleEditFormSubmit(evt) {
   closeElement(popupProfileElement);
 }
 
-function prependGridCardElement(name, link) {
+function createCardElement(name, link) {
   const cardElement = new Card(name, link, '#photo-grid-item', openElement);
-  gridContainer.prepend(cardElement.generateCard());
+  return cardElement.generateCard();
 }
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
-  prependGridCardElement(popupAddCardTitle.value, popupAddCardLink.value);
+  gridContainer.prepend(createCardElement(popupAddCardTitle.value, popupAddCardLink.value));
   closeElement(popupAddCardElement);
   evt.target.reset()
 }
@@ -106,7 +106,7 @@ popupElementList.forEach(popupElement => {
 });
 
 initialCards.forEach(item => {
-  prependGridCardElement(item.name, item.link);
+  gridContainer.prepend(createCardElement(item.name, item.link));
 });
 
 editButton.addEventListener('click', handleEditButton);
