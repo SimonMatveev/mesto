@@ -17,7 +17,24 @@ const popupAddCardElement = document.querySelector('#add-popup');
 const popupAddCardForm = popupAddCardElement.querySelector('.popup__form');
 const popupAddCardTitle = popupAddCardElement.querySelector('#card-title');
 const popupAddCardLink = popupAddCardElement.querySelector('#card-link');
-const popupAddCardButton = popupAddCardElement.querySelector('.popup__btn')
+const popupAddCardButton = popupAddCardElement.querySelector('.popup__btn');
+
+const formList = Array.from(document.forms);
+
+const formValidatorItemList = {};
+
+formList.forEach(formElement => {
+  const formValidatorItem = new FormValidator({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__btn',
+    inactiveButtonClass: 'popup__btn_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  }, formElement);
+  formValidatorItem.enableValidation();
+  formValidatorItemList[formElement.parentElement.parentElement.id] = formValidatorItem;
+});
 
 function closeElementOnEsc(evt) {
   if (evt.key === 'Escape') {
@@ -44,8 +61,7 @@ function handleEditButton() {
 
 function handleAddCardButton() {
   openElement(popupAddCardElement);
-  popupAddCardButton.classList.add('popup__btn_disabled');
-  popupAddCardButton.setAttribute('disabled', true);
+  formValidatorItemList['add-popup'].disableButton();
   popupAddCardForm.reset();
 }
 
@@ -98,17 +114,3 @@ addCardButton.addEventListener('click', handleAddCardButton);
 popupProfileForm.addEventListener('submit', handleEditFormSubmit);
 
 popupAddCardForm.addEventListener('submit', handleAddFormSubmit);
-
-const formList = Array.from(document.forms);
-
-formList.forEach(formElement => {
-  const formValidatorItem = new FormValidator({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__btn',
-    inactiveButtonClass: 'popup__btn_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-  }, formElement);
-  formValidatorItem.enableValidation();
-});
