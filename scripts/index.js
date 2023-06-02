@@ -55,6 +55,8 @@ function closeElement(element) {
 
 function handleEditButton() {
   openElement(popupProfileElement);
+  formValidatorItemList['edit-popup'].enableButton();
+  popupProfileForm.reset(); //для удаления сообщения об ошибке при закрытии-открытии формы
   popupProfileNameInput.value = profileName.textContent;
   popupProfileDesc.value = profileDescription.textContent;
 }
