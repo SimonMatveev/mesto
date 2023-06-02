@@ -56,8 +56,7 @@ function closeElement(element) {
 function handleEditButton() {
   openElement(popupProfileElement);
   formValidatorItemList['edit-popup'].enableButton();
-  formValidatorItemList['edit-popup'].hideInputError(popupProfileNameInput);
-  formValidatorItemList['edit-popup'].hideInputError(popupProfileDesc);
+  formValidatorItemList['edit-popup'].hideAllInputErrors();
   popupProfileNameInput.value = profileName.textContent;
   popupProfileDesc.value = profileDescription.textContent;
 }

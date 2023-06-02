@@ -15,18 +15,24 @@ export class FormValidator {
         this._errorElement.classList.add(this._formObject.errorClass);
     };
 
-    hideInputError(inputElement) {
+    _hideInputError(inputElement) {
         this._errorElement = this._getErrorElement(inputElement);
         inputElement.classList.remove(this._formObject.inputErrorClass);
         this._errorElement.textContent = '';
         this._errorElement.classList.remove(this._formObject.errorClass);
     };
 
+    hideAllInputErrors() {
+        this._inputList.forEach(inputElement => {
+            this._hideInputError(inputElement);
+        });
+    }
+
     _checkValidity(inputElement) {
         if (!inputElement.validity.valid) {
             this._showInputError(inputElement, inputElement.validationMessage);
         } else {
-            this.hideInputError(inputElement);
+            this._hideInputError(inputElement);
         }
     };
 
@@ -65,7 +71,7 @@ export class FormValidator {
 
         this._form.addEventListener('reset', () => {
             this._inputList.forEach(inputElement => {
-                this.hideInputError(inputElement);
+                this._hideInputError(inputElement);
             });
         });
     };
