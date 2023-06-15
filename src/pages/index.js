@@ -1,9 +1,9 @@
-import { Card } from './Card.js';
-import { initialCards } from './initialCards.js';
-import { FormValidator } from './FormValidator.js';
-import { Section } from './Section.js';
-import { PopupWithForm, PopupWithImage } from './Popup.js';
-import { UserInfo } from './UserInfo.js';
+import { Card } from '../components/Card.js';
+import { initialCards } from '../components/initialCards.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js';
+import { PopupWithForm, PopupWithImage } from '../components/Popup.js';
+import { UserInfo } from '../components/UserInfo.js';
 import '../pages/index.css';
 
 const editButton = document.querySelector('.profile__edit-button');
