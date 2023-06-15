@@ -18,25 +18,27 @@ export class Card {
     this._popupElement.querySelector('.popup__caption').textContent = this._title;
   }
 
+  _like() {
+    this._cardLikeButton.classList.toggle('photo-grid__like-button_active');
+  }
+
+  _deleteCard() {
+    this._cardElement.remove();
+  }
+
   _setEventListeners() {
-    this._cardImage.addEventListener('click', () => {
-      this._handlePopupImage();
-    });
+    this._cardImage.addEventListener('click', () => this._handlePopupImage());
 
-    this._cardElement.querySelector('.photo-grid__like-button').addEventListener('click', evt => {
-      evt.target.classList.toggle('photo-grid__like-button_active');
-    });
+    this._cardLikeButton.addEventListener('click', () => this._like());
 
-    this._cardElement.querySelector('.photo-grid__item-delete').addEventListener('click', evt => {
-      evt.target.parentNode.remove();
-    });
+    this._cardElement.querySelector('.photo-grid__item-delete').addEventListener('click', () => this._deleteCard())
   }
 
   generateCard() {
-    this._cardElement = this._getTemplate();
+    this._cardElement = this._getTemplate().children[0];
     this._cardImage = this._cardElement.querySelector('.photo-grid__image');
     this._cardTitle = this._cardElement.querySelector('.photo-grid__item-title');
-
+    this._cardLikeButton = this._cardElement.querySelector('.photo-grid__like-button');
     this._cardTitle.textContent = this._title;
     this._cardImage.src = this._link;
     this._cardImage.alt = `${this._title}. Фотография`;
