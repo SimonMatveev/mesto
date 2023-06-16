@@ -2,7 +2,8 @@ import { Card } from '../components/Card.js';
 import { initialCards } from '../components/initialCards.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
-import { PopupWithForm, PopupWithImage } from '../components/Popup.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import '../pages/index.css';
 
@@ -25,7 +26,7 @@ formList.forEach(formElement => {
     errorClass: 'popup__error_visible'
   }, formElement);
   formValidatorItem.enableValidation();
-  formValidatorItemList[formElement.parentElement.parentElement.id] = formValidatorItem;
+  formValidatorItemList[formElement.closest('.popup').id] = formValidatorItem;
 });
 
 const userInfoObject = new UserInfo({
@@ -35,7 +36,7 @@ const userInfoObject = new UserInfo({
 
 const popupAddElement = new PopupWithForm('#add-popup', (evt, values) => {
   evt.preventDefault();
-  cardSection.addItem(createCardElement(values[0], values[1]));
+  cardSection.addItem(createCardElement(values['card-title'], values['card-link']));
   popupAddElement.close();
 });
 popupAddElement.setEventListeners();
@@ -45,7 +46,7 @@ popupImageElement.setEventListeners();
 
 const popupEditElement = new PopupWithForm('#edit-popup', (evt, values) => {
   evt.preventDefault();
-  userInfoObject.setUserInfo(values[0], values[1]);
+  userInfoObject.setUserInfo(values['name'], values['description']);
   popupEditElement.close();
 });
 popupEditElement.setEventListeners();

@@ -8,14 +8,7 @@ export class Card {
   }
 
   _getTemplate() {
-    return document.querySelector(this._template).content.cloneNode(true);
-  }
-
-  _handlePopupImage() {
-    this._openElement(this._popupElement);
-    this._popupElement.querySelector('.popup__image').src = this._link;
-    this._popupElement.querySelector('.popup__image').alt = this._cardImage.alt;
-    this._popupElement.querySelector('.popup__caption').textContent = this._title;
+    return document.querySelector(this._template).content.firstElementChild.cloneNode(true);
   }
 
   _like() {
@@ -24,10 +17,11 @@ export class Card {
 
   _deleteCard() {
     this._cardElement.remove();
+    this._cardElement = null;
   }
 
   _setEventListeners() {
-    this._cardImage.addEventListener('click', () => this._handlePopupImage());
+    this._cardImage.addEventListener('click', () => this._openElement(this._title, this._link));
 
     this._cardLikeButton.addEventListener('click', () => this._like());
 
@@ -35,7 +29,7 @@ export class Card {
   }
 
   generateCard() {
-    this._cardElement = this._getTemplate().children[0];
+    this._cardElement = this._getTemplate();
     this._cardImage = this._cardElement.querySelector('.photo-grid__image');
     this._cardTitle = this._cardElement.querySelector('.photo-grid__item-title');
     this._cardLikeButton = this._cardElement.querySelector('.photo-grid__like-button');
