@@ -4,11 +4,10 @@ export class Card {
     this._link = link;
     this._template = template;
     this._openElement = openElement;
-    this._popupElement = document.querySelector('#image-popup');
   }
 
   _getTemplate() {
-    return document.querySelector(this._template).content.firstElementChild.cloneNode(true);
+    return document.querySelector(this._template).content.cloneNode(true).querySelector('.photo-grid__item');
   }
 
   _like() {
