@@ -10,6 +10,7 @@
     background-size: contain;
     background-color: transparent;
     border: none;
+    display: none;
 }
 
 .photo-grid__item-delete:hover {
