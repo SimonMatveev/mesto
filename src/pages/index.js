@@ -24,10 +24,12 @@ const api = new Api({
   }
 });
 
-api.getUserInfo()
-  .then(data => {
-    userInfoObject.setUserInfo(data.name, data.about);
-    userInfoObject.setUserAvatar(data.avatar);
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(res => {
+    userInfoObject.setUserInfo(res[0].name, res[0].about);
+    userInfoObject.setUserAvatar(res[0].avatar);
+
+    const cardElementList = {};
 
     function createCardElement(item, userId) {
       const cardElement = new Card(item, '#photo-grid-item', userId, {
@@ -36,26 +38,26 @@ api.getUserInfo()
         likeButtonCallback: id => api.like(id),
         dislikeButtonCallback: id => api.dislike(id)
       });
+      cardElementList[item._id] = cardElement;
       return cardElement.generateCard();
     }
 
     const cardSection = new Section({
-      renderer: item => cardSection.addItem(createCardElement(item, data._id))
+      renderer: item => cardSection.addItem(createCardElement(item, res[0]._id))
     }, '.photo-grid');
 
-
-    api.getInitialCards()
-      .then(res => cardSection.renderItems(res.reverse()))
-      .catch(err => console.log(err));
+    cardSection.renderItems(res[1]);
 
     const popupAddElement = new PopupWithForm('#add-popup', (evt, values, btn) => {
       evt.preventDefault();
       btn.value = 'Сохранение...';
       api.addCard(values['card-title'], values['card-link'])
-        .then(res => cardSection.addItem(createCardElement(res, data._id)))
+        .then(data => {
+          cardSection.addItem(createCardElement(data, res[0]._id))
+          popupAddElement.close();
+        })
         .catch(err => console.log(err))
         .finally(() => btn.value = 'Сохранить');
-      popupAddElement.close();
     });
     popupAddElement.setEventListeners();
 
@@ -66,10 +68,15 @@ api.getUserInfo()
 
     addCardButton.addEventListener('click', handleAddCardButton);
 
-    const popupDeleteElement = new PopupForDeletion('#confirm-popup', (id, element) => {
+    const popupDeleteElement = new PopupForDeletion('#confirm-popup', (id, btn) => {
+      btn.textContent = 'Удаление...';
       api.deleteCard(id)
-        .then(cardSection.removeItem(element))
-        .catch(err => console.log(err));
+        .then(() => {
+          cardElementList[id].deleteCard();
+          popupDeleteElement.close();
+        })
+        .catch(err => console.log(err))
+        .finally(() => btn.textContent = 'Удалить');
     });
     popupDeleteElement.setEventListeners();
   })
@@ -101,10 +108,12 @@ const popupEditElement = new PopupWithForm('#edit-popup', (evt, values, btn) => 
   evt.preventDefault();
   btn.value = 'Сохранение...';
   api.setUserInfo(values['name'], values['description'])
-    .then(res => userInfoObject.setUserInfo(res.name, res.about))
+    .then(res => {
+      userInfoObject.setUserInfo(res.name, res.about);
+      popupEditElement.close();
+    })
     .catch(err => console.log(err))
     .finally(() => btn.value = 'Сохранить');
-  popupEditElement.close();
 });
 popupEditElement.setEventListeners();
 
@@ -112,10 +121,12 @@ const popupAvatarElement = new PopupWithForm('#avatar-popup', (evt, values, btn)
   evt.preventDefault();
   btn.value = 'Сохранение...';
   api.updateAvatar(values['avatar'])
-    .then(res => userInfoObject.setUserAvatar(res.avatar))
+    .then(res => {
+      userInfoObject.setUserAvatar(res.avatar);
+      popupAvatarElement.close();
+    })
     .catch(err => console.log(err))
     .finally(() => btn.value = 'Сохранить');
-  popupAvatarElement.close();
 });
 popupAvatarElement.setEventListeners();
 

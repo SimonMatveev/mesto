@@ -8,18 +8,18 @@ export class Section {
         this._container.prepend(element);
     }
 
-    removeItem(element) {
-        this._container.removeChild(element);
-    }
-
     clear() {
         this._container.innerHTML = '';
+    }
+
+    _reverseItems(initialItems) {
+        return initialItems.reverse();
     }
 
     renderItems(initialItems) {
         this.clear();
 
-        initialItems.forEach(item => {
+        this._reverseItems(initialItems).forEach(item => {
             this._renderer(item);
         })
     }

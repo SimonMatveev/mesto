@@ -77,4 +77,9 @@ export class Card {
 
     return this._cardElement;
   }
+
+  deleteCard() {
+    this._cardElement.remove();
+    this._cardElement = null;
+  }
 };

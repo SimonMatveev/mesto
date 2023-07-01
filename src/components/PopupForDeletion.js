@@ -17,8 +17,7 @@ export class PopupForDeletion extends Popup {
     super.setEventListeners();
 
     this._confirmButton.addEventListener('click', () => {
-      this._deleteElement(this._id, this._cardElement);
-      this.close();
+      this._deleteElement(this._id, this._confirmButton);
     });
 
   }
