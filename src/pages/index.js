@@ -25,9 +25,9 @@ const api = new Api({
 });
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(res => {
-    userInfoObject.setUserInfo(res[0].name, res[0].about);
-    userInfoObject.setUserAvatar(res[0].avatar);
+  .then(([userData, cardsData]) => {
+    userInfoObject.setUserInfo(userData.name, userData.about);
+    userInfoObject.setUserAvatar(userData.avatar);
 
     const cardElementList = {};
 
@@ -43,17 +43,17 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     }
 
     const cardSection = new Section({
-      renderer: item => cardSection.addItem(createCardElement(item, res[0]._id))
+      renderer: item => cardSection.addItem(createCardElement(item, userData._id))
     }, '.photo-grid');
 
-    cardSection.renderItems(res[1]);
+    cardSection.renderItems(cardsData);
 
     const popupAddElement = new PopupWithForm('#add-popup', (evt, values, btn) => {
       evt.preventDefault();
       btn.value = 'Сохранение...';
       api.addCard(values['card-title'], values['card-link'])
         .then(data => {
-          cardSection.addItem(createCardElement(data, res[0]._id))
+          cardSection.addItem(createCardElement(data, userData._id))
           popupAddElement.close();
         })
         .catch(err => console.log(err))
